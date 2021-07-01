@@ -1,16 +1,7 @@
 import React from 'react';
 
-function Nav () {
-  const categories = [
-    {
-      name: "Projects",
-      description: "A list of projects I've completed for academic purposes as well as personal adventures"
-    },
-    {
-      name: "LinkedIn",
-      description: "LinkedIn profile"
-    }
-  ]
+function Nav (props) {
+  const { tabs = [], currentTab, setCurrentTab } = props
   return (
     <header>
       <nav>
@@ -23,9 +14,18 @@ function Nav () {
           <li>
             <span>Contact</span>
           </li>
-          {categories.map(cateogry => (
-            <li className="mx-1" key={cateogry.name}>
-              <span>{cateogry.name}</span>
+          {tabs.map((tab) => (
+            <li
+            className={`mx-1 ${
+              currentTab.name === tab.name && 'navActive'
+            }`}
+            key={tab.name}
+            >
+              <span
+              onClick={() => {
+                setCurrentTab(tab)
+              }}
+              >{tab.name}</span>
             </li>
           ))}
         </ul>
